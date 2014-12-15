@@ -1,0 +1,6 @@
+// After MongoDB has been installed, service is running.
+// Connect to MongoDB by running mongo.exe
+
+// For Part 8 Video
+use rm2mmo_test		// Create database named rm2mmo_test
+db.createCollection(users); // Create collection named users
