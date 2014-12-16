@@ -28,3 +28,9 @@ Server/node_modules
 
 # Users Environment Variables
 .lock-wscript
+
+# All .exe
+*.exe
+
+# Winmerge .bak files
+*.bak

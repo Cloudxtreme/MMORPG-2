@@ -15,20 +15,21 @@ var common_conf = {
 	max_player: 100,
 	data_paths: {
 		items: __dirname + "\\Game Data\\" + "Items\\",
-		maps: __dirname + "\\Game Data\\" + "Maps\\",
+		maps: __dirname + "\\Game Data\\" + "Maps\\"
 	},
 	starting_zone: "rm_map_home"
 };
 
+//Environment Specific Configuration
 var conf = {
 	production: {
 		ip: args.ip || "0.0.0.0",
-		port: args.port || "8081",
+        port: args.port || 8081,
 		database: "mongodb://127.0.0.1/rm2mmo_prod"
 	},
 	test: {
 		ip: args.ip || "0.0.0.0",
-		port: args.port || "8082",
+        port: args.port || 8082,
 		database: "mongodb://127.0.0.1/rm2mmo_test"
 	}
 };

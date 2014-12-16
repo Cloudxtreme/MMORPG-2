@@ -31,11 +31,11 @@ userSchema.statics.register = function(username, password, callback){
 	
 };
 
-userSchema.statics.register = function(username, password, callback){
+userSchema.statics.login = function(username, password, callback){
 	// Query db using json object
 	User.findOne({username: username}, function(err, user){
 		// Deal with login errors (bad user, no user)
-		if (!err & user){
+		if (!err && user){
 			if (user.password == password){
 				callback(true, user);
 			} else {
