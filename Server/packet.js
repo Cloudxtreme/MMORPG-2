@@ -57,12 +57,10 @@ module.exports = packet = {
 	interpret: function(client, dataPacket){
 		var header = PacketModels.header.parse(dataPacket);
 		console.log("Interpret: " + header.command);
-		console.log("Extracted Packet: " + dataPacket.toString());
 		
 		switch(header.command.toUpperCase()){
 			case("LOGIN"):{
 				var data = PacketModels.login.parse(dataPacket);
-				console.log("Data: " + data.toString());
 				User.login(data.username, data.password, function(result, user){
 					console.log('Login Result: ' + result);
 					if(result){
@@ -85,6 +83,17 @@ module.exports = packet = {
 					}					
 				});
 			}break;		
+			
+			case("POS"):{
+				var data = PacketModels.pos.parse(dataPacket);
+				client.user.pos_x = data.target_x;
+				client.user.pos_y = data.target_y;
+				
+				// not optimized
+				client.user.save();
+				client.broadcastroom(packet.build(["POS", client.user.username, data.target_x, data.target_y]));
+				console.log(data);
+			}break;
 		}
 	}
 

@@ -22,11 +22,18 @@ module.exports = function(){
 		});
 		
 		maps[selected_room].clients.push(client);
-	}
+	};
+	
+	this.broadcastroom = function(packetData){
+		maps[client.user.current_room].clients.forEach(function(otherClient){
+			if(otherClient.user.username != client.user.username){
+				otherClient.socket.write(packetData);
+			}
+		});
+	};
 	
 	// Socket stuff
 	this.data = function(data){
-		console.log("client data " + data.toString());
 		packet.parse(client, data);
 	};
 	
