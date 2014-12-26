@@ -7,6 +7,7 @@ module.exports = function(){
 	// this.socket = {}
 	// this.user = {}
 	
+	// Initialization
 	this.initiate = function(){
 		// Send the connection handshake packet to the client.
 		client.socket.write(packet.build(["HELLO", now().toString()]));
@@ -14,6 +15,16 @@ module.exports = function(){
 		console.log("client initiated");
 	};
 	
+	// Client methods
+	this.enterroom = function(selected_room){
+		maps[selected_room].clients.forEach(function(otherClient){
+			otherClient.socket.write(packet.build(["ENTER", client.user.username, client.user.pos_x, client.user.pos_y]));
+		});
+		
+		maps[selected_room].clients.push(client);
+	}
+	
+	// Socket stuff
 	this.data = function(data){
 		console.log("client data " + data.toString());
 		packet.parse(client, data);
