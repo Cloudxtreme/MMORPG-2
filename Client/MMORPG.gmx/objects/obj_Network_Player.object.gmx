@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>-1</persistent>
+  <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -28,7 +28,6 @@
             <string>moving = false;
 target_x = x;
 target_y = y;
-depth = 100;
 </string>
           </argument>
         </arguments>
@@ -55,62 +54,6 @@ depth = 100;
 if (target_x &lt; x){ x -= 4; }
 if (target_y &gt; y){ y += 4; }
 if (target_y &lt; y){ y -= 4; }
-
-if (target_x == x &amp;&amp; target_y == y) { moving = false; }
-
-if (keyboard_check(vk_left) &amp;&amp; !moving &amp;&amp; place_free(x - 32, y)){
-  target_x -= 32;
-  moving = true;
-  event_user(0);
-}
-
-if (keyboard_check(vk_right) &amp;&amp; !moving &amp;&amp; place_free(x + 32, y)){
-  target_x += 32;
-  moving = true;
-  event_user(0);
-}
-
-if (keyboard_check(vk_up) &amp;&amp; !moving &amp;&amp; place_free(x, y - 32)){
-  target_y -= 32;
-  moving = true;
-  event_user(0);
-}
-
-if (keyboard_check(vk_down) &amp;&amp; !moving &amp;&amp; place_free(x, y + 32)){
-  target_y += 32;
-  moving = true;
-  event_user(0);
-}
-
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="10">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Network Send Update Player Position
-var pos_packet = buffer_create(1, buffer_grow, 1);
-buffer_write(pos_packet, buffer_string, "pos");
-buffer_write(pos_packet, buffer_s32, target_x);
-buffer_write(pos_packet, buffer_s32, target_y);
-network_write(Network.socket, pos_packet);
 </string>
           </argument>
         </arguments>
